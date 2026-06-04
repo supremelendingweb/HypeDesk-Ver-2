@@ -1,0 +1,104 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-red: var(--red);
+  --color-blue-mid: var(--blue-mid);
+  --color-blue-soft: var(--blue-soft);
+  --color-offwhite: var(--offwhite);
+  --color-page: var(--page);
+  --color-divider: var(--divider);
+  --color-label: var(--label);
+  --color-placeholder: var(--placeholder);
+
+  --font-display: 'Articulat CF', 'Manrope', 'Poppins', system-ui, sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --navy: #001A40;
+  --red: #FF4040;
+  --blue-mid: #50B0FF;
+  --blue-soft: #A6DEFF;
+  --offwhite: #FCFCFA;
+  --page: #F4F5F7;
+  --divider: #E0E3E8;
+  --label: #6B7280;
+  --placeholder: #D1D5DB;
+
+  --background: var(--page);
+  --foreground: var(--navy);
+  --card: #ffffff;
+  --card-foreground: var(--navy);
+  --primary: var(--navy);
+  --primary-foreground: var(--offwhite);
+  --secondary: var(--blue-soft);
+  --secondary-foreground: var(--navy);
+  --muted: #f1f3f5;
+  --muted-foreground: var(--label);
+  --accent: var(--red);
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+  --border: var(--divider);
+  --input: var(--divider);
+  --ring: var(--blue-mid);
+  --popover: #ffffff;
+  --popover-foreground: var(--navy);
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-page);
+    color: var(--color-navy);
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 700; }
+}
+
+@layer utilities {
+  .scroll-row {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-divider) transparent;
+  }
+  .scroll-row::-webkit-scrollbar { height: 8px; }
+  .scroll-row::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 4px; }
+
+  .topo-pattern {
+    background-image:
+      radial-gradient(ellipse 800px 200px at 20% 50%, rgba(80,176,255,0.08), transparent 60%),
+      radial-gradient(ellipse 600px 180px at 70% 60%, rgba(80,176,255,0.06), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(80,176,255,0.05) 0 1px, transparent 1px 22px),
+      repeating-linear-gradient(65deg, rgba(80,176,255,0.04) 0 1px, transparent 1px 28px);
+  }
+}
