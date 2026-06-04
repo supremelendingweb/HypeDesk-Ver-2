@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import websiteGraphics from "@/assets/Website Graphics.png";
 
 interface HypeCardProps {
   label: string;
@@ -18,12 +19,14 @@ export function HypeCard({ label, icon: Icon, imageSlot, variant = "default" }: 
     >
       {/* Image area: top 65% = 169px */}
       <div
-        className="flex w-full items-center justify-center bg-placeholder"
+        className="flex w-full items-center justify-center bg-placeholder overflow-hidden"
         style={{ height: 169, backgroundColor: "var(--color-placeholder)" }}
       >
-        <span className="font-body text-[11px] uppercase tracking-wider text-gray-500">
-          [IMAGE: {imageSlot}]
-        </span>
+        <img
+          src={websiteGraphics}
+          alt="Website graphics"
+          className="h-full w-full object-cover"
+        />
       </div>
 
       {/* Label bar: bottom 35% = 91px */}

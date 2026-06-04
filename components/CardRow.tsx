@@ -20,7 +20,7 @@ export function CardRow({ id, label, children }: CardRowProps) {
         </div>
       </div>
       <div className="mx-auto max-w-[1280px] px-6 pt-5">
-        <div className="scroll-row flex gap-4 overflow-x-auto pb-4" style={{ scrollPaddingLeft: 24 }}>
+        <div className="scroll-row flex gap-4 overflow-x-auto overflow-y-visible pb-4" style={{ scrollPaddingLeft: 24 }}>
           {children}
         </div>
       </div>

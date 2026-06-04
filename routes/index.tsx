@@ -205,7 +205,7 @@ function Hero() {
       <div className="topo-pattern absolute inset-0" aria-hidden />
       <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-6">
         <h1 className="font-display text-[64px] font-extrabold leading-[1.02] tracking-tight" style={{ color: "var(--color-offwhite)" }}>
-          How can we help you win today?
+          How can we help you <span style={{ color: "#50B0FF" }}>Win Today ?</span>
         </h1>
         <p className="mt-2 font-body text-[16px] font-medium" style={{ color: "var(--color-blue-soft)" }}>
           Find your marketing assets fast. Click any category below.
@@ -239,14 +239,15 @@ function Hero() {
 function Footer() {
   const hub = [
     { label: "Ready-to-Use", id: "ready-to-go" },
-    { label: "Brand", id: "getting-started" },
-    { label: "Campaigns", id: "toolkits" },
     { label: "Custom Requests", id: "custom-requests" },
+    { label: "Toolkits", id: "toolkits" },
+    
+    
   ];
   const support = [
     { label: "Compliance", id: "compliance" },
-    { label: "Onboarding", id: "getting-started" },
     { label: "How-To", id: "how-to" },
+    { label: "Getting Started", id: "getting-started" },
     { label: "Contact", id: "most-requested" },
   ];
   return (
@@ -272,7 +273,7 @@ function Footer() {
               </div>
             </div>
             <p className="mt-5 max-w-[380px] font-body text-[14px] font-medium leading-relaxed" style={{ color: "var(--color-blue-soft)" }}>
-              The marketing request center built for Supreme Lending teams. Powered by humans, accelerated by Hype, your AI concierge.
+              The marketing request center built for Supreme Lending teams. 
             </p>
           </div>
 
