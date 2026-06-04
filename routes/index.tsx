@@ -205,7 +205,7 @@ function Hero() {
       <div className="topo-pattern absolute inset-0" aria-hidden />
       <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-6">
         <h1 className="font-display text-[64px] font-extrabold leading-[1.02] tracking-tight" style={{ color: "var(--color-offwhite)" }}>
-          How can we help you <span style={{ color: "#50B0FF" }}>Win Today ?</span>
+          How can we help you <span style={{ color: "#50B0FF" }}>win today?</span>
         </h1>
         <p className="mt-2 font-body text-[16px] font-medium" style={{ color: "var(--color-blue-soft)" }}>
           Find your marketing assets fast. Click any category below.
