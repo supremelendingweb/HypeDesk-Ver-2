@@ -12,7 +12,7 @@ import {
 import { HypeCard } from "@/components/HypeCard";
 import { CardRow } from "@/components/CardRow";
 import heroBg from "@/assets/hero-bg.jpg";
-import hypedeskLogo from "@/assets/hypedesk-logo.png.asset.json";
+import hypedeskLogo from "@/assets/HypeDesk Logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -134,7 +134,7 @@ function Header() {
           className="flex shrink-0 items-center transition-opacity hover:opacity-80"
           aria-label="HypeDesk — back to top"
         >
-          <img src={hypedeskLogo.url} alt="HypeDesk" className="h-8 w-auto" />
+          <img src={hypedeskLogo} alt="HypeDesk" className="h-8 w-auto" />
         </a>
 
         {/* Desktop nav */}
@@ -263,7 +263,7 @@ function Footer() {
               className="inline-flex items-center transition-opacity hover:opacity-80"
               aria-label="HypeDesk — back to top"
             >
-              <img src={hypedeskLogo.url} alt="HypeDesk" className="h-9 w-auto brightness-0 invert" />
+              <img src={hypedeskLogo} alt="HypeDesk" className="h-9 w-auto brightness-0 invert" />
             </a>
             <div className="mt-3 font-body">
               <div className="text-[13px] font-bold text-white">HypeDesk</div>
