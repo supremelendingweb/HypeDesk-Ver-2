@@ -198,13 +198,13 @@ function Header() {
 function Hero() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-cover bg-center"
-      style={{ height: 320, backgroundImage: `url(${heroBg})` }}
+      className="relative w-full overflow-hidden bg-cover bg-center py-12 md:py-0 md:h-[320px]"
+      style={{ backgroundImage: `url(${heroBg})` }}
     >
       <div className="absolute inset-0" style={{ backgroundColor: "rgba(0, 26, 64, 0.78)" }} aria-hidden />
       <div className="topo-pattern absolute inset-0" aria-hidden />
-      <div className="relative mx-auto flex h-full max-w-[1280px] flex-col justify-center px-6">
-        <h1 className="font-display text-[64px] font-extrabold leading-[1.02] tracking-tight" style={{ color: "var(--color-offwhite)" }}>
+      <div className="relative mx-auto flex max-w-[1280px] flex-col justify-center px-6 py-12 md:py-0 md:h-full">
+        <h1 className="font-display text-[36px] sm:text-[48px] md:text-[64px] font-extrabold leading-[1.02] tracking-tight" style={{ color: "var(--color-offwhite)" }}>
           How can we help you <span style={{ color: "#50B0FF" }}>win today?</span>
         </h1>
         <p className="mt-2 font-body text-[16px] font-medium" style={{ color: "var(--color-blue-soft)" }}>
