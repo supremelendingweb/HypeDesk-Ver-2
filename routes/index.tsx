@@ -34,7 +34,14 @@ const SECTIONS = [
   { id: "getting-started", label: "Just Getting Started?" },
 ];
 
-const CARD_SECTIONS = [
+type CardItem = {
+  label: string;
+  icon: typeof Layers;
+  imageSlot: string;
+  variant?: "default" | "dark";
+};
+
+const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
   {
     id: "most-requested",
     label: "Most Requested",
@@ -297,6 +304,8 @@ function Header() {
 }
 
 function Hero({ searchQuery, onSearchChange }: { searchQuery: string; onSearchChange: (value: string) => void; }) {
+  const hasSearchValue = searchQuery.trim().length > 0;
+
   return (
     <section
       className="relative w-full overflow-hidden bg-cover bg-center py-12 md:py-0 md:h-[320px]"
@@ -325,6 +334,16 @@ function Hero({ searchQuery, onSearchChange }: { searchQuery: string; onSearchCh
               style={{ color: "var(--color-navy)" }}
               aria-label="Search cards"
             />
+            {hasSearchValue && (
+              <button
+                type="button"
+                onClick={() => onSearchChange("")}
+                aria-label="Clear search"
+                className="flex items-center justify-center px-3 text-[color:var(--color-navy)] transition-colors hover:bg-[color:var(--color-divider)]"
+              >
+                <X size={16} />
+              </button>
+            )}
             <button
               type="submit"
               aria-label="Search"
