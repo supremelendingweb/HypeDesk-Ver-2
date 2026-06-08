@@ -5,7 +5,7 @@ import { Check, ChevronRight, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function MenubarMenu({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Menu>) {
-  return <MenubarPrimitive.Menu {...props} />;
+  return <MenubarPrimitive.Menu {...props} />; 
 }
 
 function MenubarGroup({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Group>) {
@@ -43,7 +43,7 @@ const MenubarTrigger = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>
 >(({ className, ...props }, ref) => (
-  <MenubarPrimitive.Trigger
+  <MenubarPrimitive.Trigger 
     ref={ref}
     className={cn(
       "flex cursor-default select-none items-center rounded-sm px-3 py-1 text-sm font-medium outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground",
