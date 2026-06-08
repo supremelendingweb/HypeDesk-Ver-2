@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FileText, Megaphone, Image as ImageIcon, Home, ShieldCheck,
   PenTool, FilePlus, LayoutTemplate, Globe,
@@ -34,68 +34,169 @@ const SECTIONS = [
   { id: "getting-started", label: "Just Getting Started?" },
 ];
 
-function Index() {
+const CARD_SECTIONS = [
+  {
+    id: "most-requested",
+    label: "Most Requested",
+    cards: [
+      { label: "Marketing Tech Stack", icon: Layers, imageSlot: "tech-stack-preview" },
+      { label: "Livestream Playbacks", icon: Video, imageSlot: "livestream-preview" },
+      { label: "AMP", icon: Megaphone, imageSlot: "amp-preview" },
+    ],
+  },
+  {
+    id: "ready-to-go",
+    label: "Ready To Go",
+    cards: [
+      { label: "Ready to Go Product Flyers", icon: FileText, imageSlot: "rtg-flyers-preview" },
+      { label: "Ready to Go Social Graphics", icon: ImageIcon, imageSlot: "rtg-social-preview" },
+      { label: "Ready to Go Presentations", icon: Presentation, imageSlot: "rtg-presentations-preview" },
+      { label: "Supreme Lending Logos", icon: Award, imageSlot: "sl-logos-preview" },
+      { label: "Monthly Social Content Calendar", icon: Calendar, imageSlot: "content-calendar-preview" },
+      { label: "Need a QR Code? Download Now!", icon: QrCode, imageSlot: "qr-code-preview" },
+      { label: "Visit the Supreme Lending Swag Store", icon: ShoppingBag, imageSlot: "swag-store-preview" },
+    ],
+  },
+  {
+    id: "custom-requests",
+    label: "Custom Requests",
+    cards: [
+      { label: "Open House Flyer", icon: Home, imageSlot: "open-house-preview" },
+      { label: "Custom Marketing Flyer or Graphic", icon: FilePlus, imageSlot: "custom-flyer-preview" },
+      { label: "Social Media Graphic Request", icon: LayoutTemplate, imageSlot: "custom-social-preview" },
+      { label: "General Marketing Request Form", icon: ClipboardList, imageSlot: "general-request-preview" },
+      { label: "Custom Website", icon: Globe, imageSlot: "custom-website-preview" },
+      { label: "Custom Team Logo", icon: PenTool, imageSlot: "custom-logo-preview" },
+      { label: "Photo & Video Request", icon: Camera, imageSlot: "photo-video-preview" },
+      { label: "Single Send Usherpa Email", icon: Send, imageSlot: "single-email-preview" },
+      { label: "Usherpa Email Campaign", icon: Mail, imageSlot: "email-campaign-preview" },
+      { label: "Event Request Form", icon: Calendar, imageSlot: "event-request-preview" },
+      { label: "Corporate Communications Request", icon: MessageSquare, imageSlot: "corp-comms-preview" },
+      { label: "Presentation", icon: Presentation, imageSlot: "presentation-preview" },
+    ],
+  },
+  {
+    id: "toolkits",
+    label: "Ready-to-Go Marketing Toolkits",
+    cards: [
+      { label: "Builder Toolkit", icon: Hammer, imageSlot: "builder-toolkit-preview" },
+      { label: "Reverse Toolkit", icon: RefreshCw, imageSlot: "reverse-toolkit-preview" },
+      { label: "Condo Toolkit", icon: Building2, imageSlot: "condo-toolkit-preview" },
+      { label: "Reno Toolkit", icon: Hammer, imageSlot: "reno-toolkit-preview" },
+      { label: "VA Toolkit", icon: ShieldCheck, imageSlot: "va-toolkit-preview" },
+      { label: "Spanish Toolkit", icon: Languages, imageSlot: "spanish-toolkit-preview" },
+    ],
+  },
+  {
+    id: "compliance",
+    label: "Compliance Requests",
+    cards: [
+      { label: "Submit for Marketing Compliance Approval via ComplyAI", icon: ShieldCheck, imageSlot: "complyai-preview" },
+      { label: "Social Media Compliance Checklist", icon: CheckSquare, imageSlot: "social-checklist-preview" },
+    ],
+  },
+  {
+    id: "how-to",
+    label: "How-To",
+    cards: [
+      { label: "How to Use AMP (Automated Marketing Platform)", icon: BookOpen, imageSlot: "howto-amp-preview", variant: "dark" as const },
+      { label: "How to Request an Open House Flyer", icon: FileSearch, imageSlot: "howto-openhouse-preview", variant: "dark" as const },
+      { label: "Supreme Social Support: Navigating Compliance", icon: HelpCircle, imageSlot: "howto-social-preview", variant: "dark" as const },
+    ],
+  },
+  {
+    id: "getting-started",
+    label: "Just Getting Started?",
+    cards: [
+      { label: "Onboarding Kickstarter Form", icon: UserPlus, imageSlot: "onboarding-preview" },
+      { label: "Create Your Email Signature in AMP", icon: Signature, imageSlot: "email-sig-preview" },
+      { label: "Business Cards", icon: IdCard, imageSlot: "business-cards-preview" },
+    ],
+  },
+];
+
+// In a real app, the above data would likely come from an API or database rather than being hardcoded.
+function Index() { 
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredSections = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+    const searchTerms = normalizedQuery.split(/\s+/).filter(Boolean);
+
+    if (searchTerms.length === 0) {
+      return CARD_SECTIONS;
+    }
+
+    return CARD_SECTIONS.map((section) => ({
+      ...section,
+      cards: section.cards.filter((card) => {
+        const haystack = `${section.label} ${card.label}`.toLowerCase();
+        return searchTerms.every((term) => haystack.includes(term));
+      }),
+    })).filter((section) => section.cards.length > 0);
+  }, [searchQuery]);
+
+  const hasActiveSearch = searchQuery.trim().length > 0;
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--color-page)" }}>
       <Header />
-      <Hero />
+      <Hero searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <main className="space-y-12 py-10">
-        <CardRow id="most-requested" label="Most Requested">
-          <HypeCard label="Marketing Tech Stack" icon={Layers} imageSlot="tech-stack-preview" />
-          <HypeCard label="Livestream Playbacks" icon={Video} imageSlot="livestream-preview" />
-          <HypeCard label="AMP" icon={Megaphone} imageSlot="amp-preview" />
-        </CardRow>
-
-        <CardRow id="ready-to-go" label="Ready To Go">
-          <HypeCard label="Ready to Go Product Flyers" icon={FileText} imageSlot="rtg-flyers-preview" />
-          <HypeCard label="Ready to Go Social Graphics" icon={ImageIcon} imageSlot="rtg-social-preview" />
-          <HypeCard label="Ready to Go Presentations" icon={Presentation} imageSlot="rtg-presentations-preview" />
-          <HypeCard label="Supreme Lending Logos" icon={Award} imageSlot="sl-logos-preview" />
-          <HypeCard label="Monthly Social Content Calendar" icon={Calendar} imageSlot="content-calendar-preview" />
-          <HypeCard label="Need a QR Code? Download Now!" icon={QrCode} imageSlot="qr-code-preview" />
-          <HypeCard label="Visit the Supreme Lending Swag Store" icon={ShoppingBag} imageSlot="swag-store-preview" />
-        </CardRow>
-
-        <CardRow id="custom-requests" label="Custom Requests">
-          <HypeCard label="Open House Flyer" icon={Home} imageSlot="open-house-preview" />
-          <HypeCard label="Custom Marketing Flyer or Graphic" icon={FilePlus} imageSlot="custom-flyer-preview" />
-          <HypeCard label="Social Media Graphic Request" icon={LayoutTemplate} imageSlot="custom-social-preview" />
-          <HypeCard label="General Marketing Request Form" icon={ClipboardList} imageSlot="general-request-preview" />
-          <HypeCard label="Custom Website" icon={Globe} imageSlot="custom-website-preview" />
-          <HypeCard label="Custom Team Logo" icon={PenTool} imageSlot="custom-logo-preview" />
-          <HypeCard label="Photo & Video Request" icon={Camera} imageSlot="photo-video-preview" />
-          <HypeCard label="Single Send Usherpa Email" icon={Send} imageSlot="single-email-preview" />
-          <HypeCard label="Usherpa Email Campaign" icon={Mail} imageSlot="email-campaign-preview" />
-          <HypeCard label="Event Request Form" icon={Calendar} imageSlot="event-request-preview" />
-          <HypeCard label="Corporate Communications Request" icon={MessageSquare} imageSlot="corp-comms-preview" />
-          <HypeCard label="Presentation" icon={Presentation} imageSlot="presentation-preview" />
-        </CardRow>
-
-        <CardRow id="toolkits" label="Ready-to-Go Marketing Toolkits">
-          <HypeCard label="Builder Toolkit" icon={Hammer} imageSlot="builder-toolkit-preview" />
-          <HypeCard label="Reverse Toolkit" icon={RefreshCw} imageSlot="reverse-toolkit-preview" />
-          <HypeCard label="Condo Toolkit" icon={Building2} imageSlot="condo-toolkit-preview" />
-          <HypeCard label="Reno Toolkit" icon={Hammer} imageSlot="reno-toolkit-preview" />
-          <HypeCard label="VA Toolkit" icon={ShieldCheck} imageSlot="va-toolkit-preview" />
-          <HypeCard label="Spanish Toolkit" icon={Languages} imageSlot="spanish-toolkit-preview" />
-        </CardRow>
-
-        <CardRow id="compliance" label="Compliance Requests">
-          <HypeCard label="Submit for Marketing Compliance Approval via ComplyAI" icon={ShieldCheck} imageSlot="complyai-preview" />
-          <HypeCard label="Social Media Compliance Checklist" icon={CheckSquare} imageSlot="social-checklist-preview" />
-        </CardRow>
-
-        <CardRow id="how-to" label="How-To">
-          <HypeCard variant="dark" label="How to Use AMP (Automated Marketing Platform)" icon={BookOpen} imageSlot="howto-amp-preview" />
-          <HypeCard variant="dark" label="How to Request an Open House Flyer" icon={FileSearch} imageSlot="howto-openhouse-preview" />
-          <HypeCard variant="dark" label="Supreme Social Support: Navigating Compliance" icon={HelpCircle} imageSlot="howto-social-preview" />
-        </CardRow>
-
-        <CardRow id="getting-started" label="Just Getting Started?">
-          <HypeCard label="Onboarding Kickstarter Form" icon={UserPlus} imageSlot="onboarding-preview" />
-          <HypeCard label="Create Your Email Signature in AMP" icon={Signature} imageSlot="email-sig-preview" />
-          <HypeCard label="Business Cards" icon={IdCard} imageSlot="business-cards-preview" />
-        </CardRow>
+        {hasActiveSearch ? (
+          <section className="w-full scroll-mt-24">
+            <div className="mx-auto max-w-[1280px] px-6">
+              <div className="border-b pb-3" style={{ borderColor: "var(--color-divider)" }}>
+                <h2 className="font-body text-[26px] font-bold tracking-tight" style={{ color: "var(--color-navy)" }}>
+                  Search results for “{searchQuery.trim()}”
+                </h2>
+                <p className="mt-2 font-body text-[14px] text-[color:var(--color-navy)]/80">
+                  {filteredSections.reduce((count, section) => count + section.cards.length, 0)} relevant card(s) found.
+                </p>
+              </div>
+            </div>
+            <div className="mx-auto max-w-[1280px] px-6 pt-5">
+              {filteredSections.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                  {filteredSections.flatMap((section) =>
+                    section.cards.map((card) => (
+                      <HypeCard
+                        key={`${section.id}-${card.label}`}
+                        label={card.label}
+                        icon={card.icon}
+                        imageSlot={card.imageSlot}
+                        variant={card.variant}
+                      />
+                    ))
+                  )}
+                </div>
+              ) : (
+                <div className="rounded-[14px] border border-dashed p-6 text-center" style={{ borderColor: "var(--color-divider)", backgroundColor: "rgba(255,255,255,0.65)" }}>
+                  <p className="font-body text-[15px] font-semibold" style={{ color: "var(--color-navy)" }}>
+                    We couldn't find anything matching your search.
+                  </p>
+                  <p className="mt-1 font-body text-[13px]" style={{ color: "var(--color-navy)" }}>
+                    Try words like “social”, “flyer”, “compliance”, or “toolkit”.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+        ) : (
+          CARD_SECTIONS.map((section) => (
+            <CardRow key={section.id} id={section.id} label={section.label}>
+              {section.cards.map((card) => (
+                <HypeCard
+                  key={`${section.id}-${card.label}`}
+                  label={card.label}
+                  icon={card.icon}
+                  imageSlot={card.imageSlot}
+                  variant={card.variant}
+                />
+              ))}
+            </CardRow>
+          ))
+        )}
       </main>
       <Footer />
     </div>
@@ -195,7 +296,7 @@ function Header() {
   );
 }
 
-function Hero() {
+function Hero({ searchQuery, onSearchChange }: { searchQuery: string; onSearchChange: (value: string) => void; }) {
   return (
     <section
       className="relative w-full overflow-hidden bg-cover bg-center py-12 md:py-0 md:h-[320px]"
@@ -217,9 +318,12 @@ function Hero() {
           >
             <input
               type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search flyers, social posts, logos..."
               className="flex-1 bg-transparent px-4 py-3 font-body text-[14px] font-medium outline-none placeholder:text-gray-400"
               style={{ color: "var(--color-navy)" }}
+              aria-label="Search cards"
             />
             <button
               type="submit"
