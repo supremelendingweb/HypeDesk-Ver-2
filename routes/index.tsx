@@ -125,6 +125,7 @@ const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
 // In a real app, the above data would likely come from an API or database rather than being hardcoded.
 function Index() { 
   const [searchQuery, setSearchQuery] = useState("");
+  const [showVpnReminder, setShowVpnReminder] = useState(true);
 
   const filteredSections = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -150,6 +151,7 @@ function Index() {
       <Header />
       <Hero searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <main className="space-y-12 py-10">
+        {showVpnReminder && <VpnReminderPopup onClose={() => setShowVpnReminder(false)} />}
         {hasActiveSearch ? (
           <section className="w-full scroll-mt-24">
             <div className="mx-auto max-w-[1280px] px-6">
@@ -356,6 +358,35 @@ function Hero({ searchQuery, onSearchChange }: { searchQuery: string; onSearchCh
         </div>
       </div>
     </section>
+  );
+}
+
+function VpnReminderPopup({ onClose }: { onClose: () => void }) {
+  return (
+    <>
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+      <aside
+        className="fixed bottom-4 right-4 z-50 w-[min(92vw,340px)] rounded-[14px] border border-white/10 bg-[color:var(--color-navy)]/100 p-4 text-white shadow-[0_18px_40px_rgba(0,0,0,0.25)] transition-all duration-300 ease-out backdrop-blur-sm"
+        style={{ boxShadow: "0 18px 40px rgba(0, 0, 0, 0.22)", animation: "fadeIn 220ms ease-out" }}
+      >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Dismiss VPN reminder"
+        className="absolute right-3 top-3 rounded-full p-1 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+      >
+        <X size={16} />
+      </button>
+        <p className="pr-6 font-body text-[16px] font-semibold leading-relaxed">
+          <span className="text-[color:var(--color-blue-mid)]">Pro Tip:</span> Connect to the VPN for the smoothest experience.
+        </p>
+      </aside>
+    </>
   );
 }
 
