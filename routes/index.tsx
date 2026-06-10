@@ -28,8 +28,8 @@ const SECTIONS = [
   { id: "most-requested", label: "Most Requested" },
   { id: "ready-to-go", label: "Ready To Go" },
   { id: "custom-requests", label: "Custom Requests" },
-  { id: "toolkits", label: "Ready-to-Go Marketing Toolkits" },
-  { id: "compliance", label: "Compliance Requests" },
+  { id: "toolkits", label: "Riches in Niches - Marketing Toolkits" },
+  { id: "compliance", label: "Marketing Compliance" },
   { id: "how-to", label: "How-To" },
   { id: "getting-started", label: "Just Getting Started?" },
 ];
@@ -98,7 +98,7 @@ const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
     id: "compliance",
     label: "Compliance Requests",
     cards: [
-      { label: "Submit for Marketing Compliance Approval via ComplyAI", icon: ShieldCheck, imageSlot: "complyai-preview" },
+      { label: "Marketing Compliance Review: ComplyAI", icon: ShieldCheck, imageSlot: "complyai-preview" },
       { label: "Social Media Compliance Checklist", icon: CheckSquare, imageSlot: "social-checklist-preview" },
     ],
   },
