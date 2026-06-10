@@ -118,11 +118,12 @@ const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
       { label: "Onboarding Kickstarter Form", icon: UserPlus, imageSlot: "onboarding-preview" },
       { label: "Create Your Email Signature in AMP", icon: Signature, imageSlot: "email-sig-preview" },
       { label: "Business Cards", icon: IdCard, imageSlot: "business-cards-preview" },
+      { label: "Get Spanish Certified", icon: Languages, imageSlot: "spanish-certified-preview" },
     ],
   },
 ];
 
-// In a real app, the above data would likely come from an API or database rather than being hardcoded.
+// the above data would likely come from an API or database rather than being hardcoded.
 function Index() { 
   const [searchQuery, setSearchQuery] = useState("");
   const [showVpnReminder, setShowVpnReminder] = useState(true);
@@ -146,7 +147,7 @@ function Index() {
 
   const hasActiveSearch = searchQuery.trim().length > 0;
 
-  return (
+  return ( 
     <div className="min-h-screen" style={{ backgroundColor: "var(--color-page)" }}>
       <Header />
       <Hero searchQuery={searchQuery} onSearchChange={setSearchQuery} />
@@ -383,7 +384,7 @@ function VpnReminderPopup({ onClose }: { onClose: () => void }) {
         <X size={16} />
       </button>
         <p className="pr-6 font-body text-[16px] font-semibold leading-relaxed">
-          <span className="text-[color:var(--color-blue-mid)]">Pro Tip:</span> Connect to the VPN for the smoothest experience.
+          <span className="text-[color:var(--color-blue-mid)]">Pro Tip:</span> Connect to the VPN for the smoothest experience!
         </p>
       </aside>
     </>
