@@ -84,7 +84,7 @@ const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
   },
   {
     id: "toolkits",
-    label: "Ready-to-Go Marketing Toolkits",
+    label: "Riches in Niches - Marketing Toolkits",
     cards: [
       { label: "Builder Toolkit", icon: Hammer, imageSlot: "builder-toolkit-preview" },
       { label: "Reverse Toolkit", icon: RefreshCw, imageSlot: "reverse-toolkit-preview" },
@@ -96,7 +96,7 @@ const CARD_SECTIONS: Array<{ id: string; label: string; cards: CardItem[] }> = [
   },
   {
     id: "compliance",
-    label: "Compliance Requests",
+    label: "Marketing Compliance",
     cards: [
       { label: "Marketing Compliance Review: ComplyAI", icon: ShieldCheck, imageSlot: "complyai-preview" },
       { label: "Social Media Compliance Checklist", icon: CheckSquare, imageSlot: "social-checklist-preview" },

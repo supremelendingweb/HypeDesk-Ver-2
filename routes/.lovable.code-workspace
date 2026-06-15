@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../.lovable"
+		},
+		{
+			"path": "../../.tanstack"
+		},
+		{
+			"path": "../../node_modules"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../supabase"
+		}
+	]
+}
